@@ -1,0 +1,10 @@
+ext{
+    _compileSdkVersion = 28
+    _minSdkVersion = 15
+    _targetSdkVersion = 28
+
+    _versionCode = 1
+    _versionName = "1.0"
+
+    constraintLayoutVersion = "1.1.2"
+}
