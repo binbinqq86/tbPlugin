@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
@@ -13,17 +15,30 @@ android {
     }
     productFlavors {
         water {
+            dimension 'water'
             versionNameSuffix '.5'
             applicationIdSuffix '.water'
-            dimension 'water'
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+            resValue "string", "app_name", "water_tbPlugin"
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"water"'
+            // 修改 AndroidManifest.xml 里渠道变量
+            manifestPlaceholders = [ENVIRONMENT: "water"]
         }
         t360 {
+            dimension '360'
             versionName '2.3'
             applicationId 'com.tb.t360'
-            dimension '360'
+            resValue "string", "app_name", "t360_tbPlugin"
+            buildConfigField "String", "ENVIRONMENT", '"t360"'
+            manifestPlaceholders = [ENVIRONMENT: "t360"]
         }
         xiaomi {
             dimension '360'
+            resValue "string", "app_name", "xiaomi_tbPlugin"
+            buildConfigField "String", "ENVIRONMENT", '"xiaomi"'
+            manifestPlaceholders = [ENVIRONMENT: "xiaomi"]
         }
     }
     buildTypes {
@@ -70,4 +85,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
