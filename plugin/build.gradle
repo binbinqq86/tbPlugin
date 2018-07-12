@@ -1,0 +1,19 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer{
+            pom.groupId = 'com.tb.plugin'
+            pom.artifactId = 'package-apk'
+            pom.version = '1.0.0'
+
+            repository(url: uri('../tplugins'))
+        }
+    }
+}

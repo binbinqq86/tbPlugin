@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    flavorDimensions 'water', '360'
+    defaultConfig {
+        applicationId "plugin.tb.com.tbplugin"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    productFlavors {
+        water {
+            versionNameSuffix '.5'
+            applicationIdSuffix '.water'
+            dimension 'water'
+        }
+        t360 {
+            versionName '2.3'
+            applicationId 'com.tb.t360'
+            dimension '360'
+        }
+        xiaomi {
+            dimension '360'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+//            println ">>>"+owner.versionName
+//            println ">>>${it.name}***${it.baseName}***${it.dirName}"
+//            println ">>>"+it.outputFile.absolutePath
+//            println ">>>" + it.outputFile.name + "***" + it.versionCode
+//            println ">>>${getDateAndTime()}"
+//            println variant.flavorName+"***"+variant.versionCode+"***"+variant.name+"***"+variant.applicationId
+
+            //android gradle3.0以上
+            def fileName = "${project.name}_${variant.flavorName}_${variant.buildType.name}_V${variant.versionName.replace('.', '')}_${getDateAndTime()}.apk"
+            println ">>>" + fileName
+            outputFileName = fileName
+
+            //3.0以下
+//            def outputFile=it.outputFile
+//            if (outputFile != null && outputFile.name.endsWith(".apk")) {
+//                println ">>>" + fileName
+//                it.outputFile = new File(outputFile.parent, fileName)
+//            } else {
+//                println it.outputFile.absolutePath
+//            }
+        }
+    }
+}
+
+def getDateAndTime() {
+    new Date().format("yyyyMMddHHmmss")
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
