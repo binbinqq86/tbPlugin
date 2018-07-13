@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply from: "$rootDir/version.gradle"
 
 android {
     compileSdkVersion _compileSdkVersion
@@ -42,7 +41,7 @@ android {
 //            manifestPlaceholders = [ENVIRONMENT: "xiaomi"]
         }
     }
-    productFlavors.all{
+    productFlavors.all {
         manifestPlaceholders = [ENVIRONMENT: it.name]
         resValue "string", "app_name", "${it.name}_tbPlugin"
 //        String bcf="${it.name}"
@@ -53,9 +52,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+        }
     }
 
     applicationVariants.all { variant ->
+//        variant.packageApplication.outputDirectory = new File("/Users/tb/Desktop/${rootProject.name}${variant.buildType.name}")
         variant.outputs.all {
 //            println ">>>"+owner.versionName
 //            println ">>>${it.name}***${it.baseName}***${it.dirName}"
@@ -82,7 +85,7 @@ android {
 }
 
 def getDateAndTime() {
-    new Date().format("yyyyMMddHHmmss")
+    new Date().format("yyyyMMddHHmmss",TimeZone.getTimeZone("GMT+08:00"))
 }
 
 dependencies {
@@ -92,7 +95,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 }
 repositories {
     mavenCentral()
