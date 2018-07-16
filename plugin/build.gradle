@@ -8,12 +8,18 @@ dependencies {
 
 uploadArchives {
     repositories {
-        mavenDeployer{
+        mavenDeployer {
             pom.groupId = 'com.tb.plugin'
             pom.artifactId = 'package-apk'
-            pom.version = '1.0.0'
+            //最后必须是-SNAPSHOT
+            pom.version = IS_PUBLISH.toBoolean() ? VERSION : VERSION + '-SNAPSHOT'
 
-            repository(url: uri('../tplugins'))
+            //传到本地目录
+            //repository(url: uri('../tplugins'))
+            //传到本地maven私服
+            repository(url: IS_PUBLISH.toBoolean() ? 'http://localhost:8081/nexus/content/repositories/releases/' : 'http://localhost:8081/nexus/content/repositories/snapshots/') {
+                authentication(userName: 'admin', password: 'admin123')
+            }
         }
     }
 }

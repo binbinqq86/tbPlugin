@@ -5,18 +5,32 @@ buildscript {
     repositories {
         google()
         jcenter()
+//        maven{
+//            url './tplugins'
+//        }
+//        maven{
+//            url 'http://localhost:8081/nexus/content/repositories/releases/'
+//        }
+//        maven{
+//            url 'http://localhost:8081/nexus/content/repositories/snapshots/'
+//        }
+//        maven{
+//            //默认的public组，包含全部默认的仓库
+//            url 'http://localhost:8081/nexus/content/groups/public'
+//        }
         maven{
-            url './tplugins'
+            //自己创建的组，包含release和snapshot
+            url 'http://localhost:8081/nexus/content/groups/tb'
         }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$androidGradleVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'com.tb.plugin:package-apk:1.0.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath 'com.tb.plugin:package-apk:1.0.0-SNAPSHOT'
     }
 }
 
