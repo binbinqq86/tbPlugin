@@ -43,6 +43,11 @@ allprojects {
         google()
         jcenter()
     }
+    //https://blog.csdn.net/zl1zl2zl3/article/details/60961940
+    configurations.all {
+        //设置本地缓存的更新策略：不缓存，每次都去拉取最新的
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
 }
 
 task clean(type: Delete) {
