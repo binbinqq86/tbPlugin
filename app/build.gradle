@@ -1,52 +1,55 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: com.tb.plugin.TbPluginPackageApk
 
 android {
     compileSdkVersion _compileSdkVersion
-    flavorDimensions 'water', '360'
+//    flavorDimensions 'water', '360'
     defaultConfig {
         applicationId "plugin.tb.com.tbplugin"
         minSdkVersion _minSdkVersion
         targetSdkVersion _targetSdkVersion
-        versionCode _versionCode
-        versionName _versionName
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resValue "string", "app_name", "tbPlugin"
     }
-    productFlavors {
-        water {
-            dimension 'water'
-            versionNameSuffix '.5'
-            applicationIdSuffix '.water'
-            // 动态添加 string.xml 字段；
-            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
-//            resValue "string", "app_name", "water_tbPlugin"
-            // 动态修改 常量 字段
-            buildConfigField "String", "ENVIRONMENT", '"water"'
-            // 修改 AndroidManifest.xml 里渠道变量
-//            manifestPlaceholders = [ENVIRONMENT: "water"]
-        }
-        t360 {
-            dimension '360'
-            versionName '2.3'
-            applicationId 'com.tb.t360'
-//            resValue "string", "app_name", "t360_tbPlugin"
-            buildConfigField "String", "ENVIRONMENT", '"t360"'
-//            manifestPlaceholders = [ENVIRONMENT: "t360"]
-        }
-        xiaomi {
-            dimension '360'
-//            resValue "string", "app_name", "xiaomi_tbPlugin"
-            buildConfigField "String", "ENVIRONMENT", '"xiaomi"'
-//            manifestPlaceholders = [ENVIRONMENT: "xiaomi"]
-        }
-    }
-    productFlavors.all {
-        manifestPlaceholders = [ENVIRONMENT: it.name]
-        resValue "string", "app_name", "${it.name}_tbPlugin"
-//        String bcf="${it.name}"
-//        buildConfigField "String", "ENVIRONMENT", '"$bcf"'
-    }
+//    productFlavors {
+//        water {
+//            dimension 'water'
+//            versionNameSuffix '.5'
+//            applicationIdSuffix '.water'
+//            // 动态添加 string.xml 字段；
+//            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+////            resValue "string", "app_name", "water_tbPlugin"
+//            // 动态修改 常量 字段
+//            buildConfigField "String", "ENVIRONMENT", '"water"'
+//            // 修改 AndroidManifest.xml 里渠道变量
+////            manifestPlaceholders = [ENVIRONMENT: "water"]
+//        }
+//        t360 {
+//            dimension '360'
+//            versionName '2.3'
+//            applicationId 'com.tb.t360'
+////            resValue "string", "app_name", "t360_tbPlugin"
+//            buildConfigField "String", "ENVIRONMENT", '"t360"'
+////            manifestPlaceholders = [ENVIRONMENT: "t360"]
+//        }
+//        xiaomi {
+//            dimension '360'
+////            resValue "string", "app_name", "xiaomi_tbPlugin"
+//            buildConfigField "String", "ENVIRONMENT", '"xiaomi"'
+////            manifestPlaceholders = [ENVIRONMENT: "xiaomi"]
+//        }
+//    }
+//    productFlavors.all {
+//        manifestPlaceholders = [ENVIRONMENT: it.name]
+//        resValue "string", "app_name", "${it.name}_tbPlugin"
+////        String bcf="${it.name}"
+////        buildConfigField "String", "ENVIRONMENT", '"$bcf"'
+//    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -88,6 +91,10 @@ def getDateAndTime() {
     new Date().format("yyyyMMddHHmmss",TimeZone.getTimeZone("GMT+08:00"))
 }
 
+packageConfig{
+    appVersion = VERSION_NAME
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
@@ -97,6 +104,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 }
-repositories {
-    mavenCentral()
+
+task assembleChannel{
+    dependsOn('assembleReleasePackage')
 }

@@ -17,9 +17,9 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${ENVIRONMENT}" />
+        <!--<meta-data-->
+            <!--android:name="UMENG_CHANNEL"-->
+            <!--android:value="${ENVIRONMENT}" />-->
     </application>
 
 </manifest>

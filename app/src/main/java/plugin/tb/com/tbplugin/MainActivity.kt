@@ -9,9 +9,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        tv.text = """ENVIRONMENT:${BuildConfig.ENVIRONMENT}
-app_name:${getString(R.string.app_name)}
-flavor:${BuildConfig.FLAVOR}
-                  """
+//        tv.text = """ENVIRONMENT:${BuildConfig.ENVIRONMENT}
+//app_name:${getString(R.string.app_name)}
+//flavor:${BuildConfig.FLAVOR}
+//                  """
     }
 }

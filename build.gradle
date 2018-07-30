@@ -19,10 +19,10 @@ buildscript {
 //            //默认的public组，包含全部默认的仓库
 //            url 'http://localhost:8081/nexus/content/groups/public'
 //        }
-        maven{
-            //自己创建的组，包含release和snapshot
-            url 'http://localhost:8081/nexus/content/groups/tb'
-        }
+//        maven{
+//            //自己创建的组，包含release和snapshot
+//            url 'http://localhost:8081/nexus/content/groups/tb'
+//        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$androidGradleVersion"
@@ -31,11 +31,11 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'com.tb.plugin:package-apk:1.0.0-SNAPSHOT'
+//        classpath 'com.tb.plugin:package-apk:1.0.0-SNAPSHOT'
     }
 }
 
-apply plugin: 'com.tb.plugin.package-apk'
+//apply plugin: 'com.tb.plugin.package-apk'
 
 
 allprojects {
