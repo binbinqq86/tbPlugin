@@ -72,7 +72,7 @@ android {
 
             //android gradle3.0以上
             def fileName = "${project.name}_${variant.flavorName}_${variant.buildType.name}_V${variant.versionName.replace('.', '')}_${getDateAndTime()}.apk"
-            println ">>>" + fileName
+            println "newAppName>>>" + fileName
             outputFileName = fileName
 
             //3.0以下

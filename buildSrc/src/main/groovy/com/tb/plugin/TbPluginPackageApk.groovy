@@ -22,6 +22,10 @@ class TbPluginPackageApk implements Plugin<Project> {
 
             //依赖assemble，需要先编译出所有的包
             task.dependsOn it.assemble
+
+            it.outputs.all{
+                println "appName>>>$it.outputFileName"
+            }
         }
     }
 }
