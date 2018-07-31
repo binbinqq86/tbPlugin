@@ -19,6 +19,6 @@ class PackageTask extends DefaultTask {
     @TaskAction
     void packageTask() {
         appVersion=targetProject.packageConfig.appVersion
-        println "packaging......$targetProject.name...$variant.versionName...$variant.buildType.name...$variant.name"
+        println "packaging...$targetProject.name...$variant.versionName...$variant.buildType.name...$variant.name"
     }
 }

@@ -19,8 +19,11 @@ class TbPluginPackageApk implements Plugin<Project> {
             PackageTask task = project.tasks.create("assemble${variantName}Package", PackageTask.class)
             task.targetProject = project
             task.variant = it
+            task.doFirst {
+                println '>>>默认包全部生成，开始打加固签名渠道包。。。'
+            }
 
-            //依赖assemble，需要先编译出所有的包
+            //依赖assemble，需要先编译出所有的该variant的包
             task.dependsOn it.assemble
 
             it.outputs.all{
