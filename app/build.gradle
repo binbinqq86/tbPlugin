@@ -6,6 +6,16 @@ apply plugin: com.tb.plugin.TbPluginPackageApk
 android {
     compileSdkVersion _compileSdkVersion
 //    flavorDimensions 'water', '360'
+
+    signingConfigs {
+        keyConfig {
+            keyAlias KEY_MOBILE_ALIAS
+            keyPassword KEY_PASSWORD
+            storeFile file(KEY_FILE)
+            storePassword KEY_PASSWORD
+        }
+    }
+
     defaultConfig {
         applicationId "plugin.tb.com.tbplugin"
         minSdkVersion _minSdkVersion
@@ -57,12 +67,14 @@ android {
             zipAlignEnabled true
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.keyConfig
         }
         debug {
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled false
             debuggable true
+            signingConfig signingConfigs.keyConfig
         }
     }
 
