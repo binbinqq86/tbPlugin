@@ -77,7 +77,13 @@ android {
 //            println variant.flavorName+"***"+variant.versionCode+"***"+variant.name+"***"+variant.applicationId
 
             //android gradle3.0以上
-            def fileName = "${project.name}_${variant.flavorName}_${variant.buildType.name}_V${variant.versionName.replace('.', '')}_${getDateAndTime()}.apk"
+            def flavor = variant.flavorName
+            if (flavor == null || flavor == "" || flavor.length() == 0) {
+                flavor = "flavor"
+            } else {
+
+            }
+            def fileName = "${project.name}_${flavor}_${variant.buildType.name}_V${variant.versionName.replace('.', '')}_${getDateAndTime()}.apk"
             println "newAppName>>>" + fileName
             outputFileName = fileName
 
@@ -94,10 +100,10 @@ android {
 }
 
 def getDateAndTime() {
-    new Date().format("yyyyMMddHHmmss",TimeZone.getTimeZone("GMT+08:00"))
+    new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+08:00"))
 }
 
-packageConfig{
+packageConfig {
     appVersion = VERSION_NAME
 }
 
@@ -111,6 +117,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 }
 
-task assembleChannel{
+task assembleChannel {
     dependsOn('assembleReleasePackage')
 }
