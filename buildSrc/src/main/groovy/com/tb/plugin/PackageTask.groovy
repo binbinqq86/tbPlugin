@@ -6,7 +6,11 @@ import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
-
+/**
+ * @author tb
+ * @time 2018/7/31 下午3:57
+ * @des 360加固文档：http://jiagu.360.cn/#/global/help/6
+ */
 class PackageTask extends DefaultTask {
 
     @Input
