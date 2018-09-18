@@ -5,7 +5,7 @@ apply plugin: com.tb.plugin.TbPluginPackageApk
 
 android {
     compileSdkVersion _compileSdkVersion
-//    flavorDimensions 'water', '360'
+    flavorDimensions 'water', '360'
 
     signingConfigs {
         keyConfig {
@@ -25,40 +25,40 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resValue "string", "app_name", "tbPlugin"
     }
-//    productFlavors {
-//        water {
-//            dimension 'water'
-//            versionNameSuffix '.5'
-//            applicationIdSuffix '.water'
-//            // 动态添加 string.xml 字段；
-//            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
-////            resValue "string", "app_name", "water_tbPlugin"
-//            // 动态修改 常量 字段
-//            buildConfigField "String", "ENVIRONMENT", '"water"'
-//            // 修改 AndroidManifest.xml 里渠道变量
-////            manifestPlaceholders = [ENVIRONMENT: "water"]
-//        }
-//        t360 {
-//            dimension '360'
-//            versionName '2.3'
-//            applicationId 'com.tb.t360'
-////            resValue "string", "app_name", "t360_tbPlugin"
-//            buildConfigField "String", "ENVIRONMENT", '"t360"'
-////            manifestPlaceholders = [ENVIRONMENT: "t360"]
-//        }
-//        xiaomi {
-//            dimension '360'
-////            resValue "string", "app_name", "xiaomi_tbPlugin"
-//            buildConfigField "String", "ENVIRONMENT", '"xiaomi"'
-////            manifestPlaceholders = [ENVIRONMENT: "xiaomi"]
-//        }
-//    }
-//    productFlavors.all {
-//        manifestPlaceholders = [ENVIRONMENT: it.name]
-//        resValue "string", "app_name", "${it.name}_tbPlugin"
-////        String bcf="${it.name}"
-////        buildConfigField "String", "ENVIRONMENT", '"$bcf"'
-//    }
+    productFlavors {
+        water {
+            dimension 'water'
+            versionNameSuffix '.5'
+            applicationIdSuffix '.water'
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+//            resValue "string", "app_name", "water_tbPlugin"
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"water"'
+            // 修改 AndroidManifest.xml 里渠道变量
+//            manifestPlaceholders = [ENVIRONMENT: "water"]
+        }
+        t360 {
+            dimension '360'
+            versionName '2.3'
+            applicationId 'com.tb.t360'
+//            resValue "string", "app_name", "t360_tbPlugin"
+            buildConfigField "String", "ENVIRONMENT", '"t360"'
+//            manifestPlaceholders = [ENVIRONMENT: "t360"]
+        }
+        xiaomi {
+            dimension '360'
+//            resValue "string", "app_name", "xiaomi_tbPlugin"
+            buildConfigField "String", "ENVIRONMENT", '"xiaomi"'
+//            manifestPlaceholders = [ENVIRONMENT: "xiaomi"]
+        }
+    }
+    productFlavors.all {
+        manifestPlaceholders = [ENVIRONMENT: it.name]
+        resValue "string", "app_name", "${it.name}_tbPlugin"
+//        String bcf="${it.name}"
+//        buildConfigField "String", "ENVIRONMENT", '"$bcf"'
+    }
 
     buildTypes {
         release {
@@ -130,5 +130,15 @@ dependencies {
 }
 
 task assembleChannel {
-    dependsOn('assembleReleasePackage')
+//    dependsOn('assembleReleasePackage')
+    //不同flavor下的操作
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def variantName = variant.name.capitalize()
+            println "---" + variantName
+            if (variantName.contains("Release")) {
+                dependsOn("assemble${variantName}Package")
+            }
+        }
+    }
 }

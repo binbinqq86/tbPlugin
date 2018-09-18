@@ -9,7 +9,6 @@ import org.gradle.api.Project
  * @des 打包apk插件
  */
 class TbPluginPackageApk implements Plugin<Project> {
-
     @Override
     void apply(Project project) {
         project.extensions.create("packageConfig", PackageExtension)
