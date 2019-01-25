@@ -31,34 +31,34 @@ android {
         vip {
             dimension 'money'
             versionNameSuffix '.5'
-            applicationIdSuffix '.water'
+            applicationIdSuffix '.vip'
             // 动态添加 string.xml 字段；
             // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
-//            resValue "string", "app_name", "water_tbPlugin"
+//            resValue "string", "app_name", "vip_tbPlugin"
             // 动态修改 常量 字段
-            buildConfigField "String", "ENVIRONMENT", '"water"'
+            buildConfigField "String", "ENVIRONMENT", '"vip"'
             // 修改 AndroidManifest.xml 里渠道变量
-//            manifestPlaceholders = [ENVIRONMENT: "water"]
+//            manifestPlaceholders = [ENVIRONMENT: "vip"]
         }
         free {
             dimension 'money'
             versionNameSuffix '.5'
-            applicationIdSuffix '.water'
+            applicationIdSuffix '.free'
             // 动态添加 string.xml 字段；
             // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
-//            resValue "string", "app_name", "water_tbPlugin"
+//            resValue "string", "app_name", "free_tbPlugin"
             // 动态修改 常量 字段
-            buildConfigField "String", "ENVIRONMENT", '"water"'
+            buildConfigField "String", "ENVIRONMENT", '"free"'
             // 修改 AndroidManifest.xml 里渠道变量
-//            manifestPlaceholders = [ENVIRONMENT: "water"]
+//            manifestPlaceholders = [ENVIRONMENT: "free"]
         }
         baidu {
             dimension 'channel'
             versionName '2.3'
-            applicationId 'com.tb.t360'
-//            resValue "string", "app_name", "t360_tbPlugin"
-            buildConfigField "String", "ENVIRONMENT", '"t360"'
-//            manifestPlaceholders = [ENVIRONMENT: "t360"]
+            applicationId 'com.tb.baidu'
+//            resValue "string", "app_name", "baidu_tbPlugin"
+            buildConfigField "String", "ENVIRONMENT", '"baidu"'
+//            manifestPlaceholders = [ENVIRONMENT: "baidu"]
         }
         xiaomi {
             dimension 'channel'
