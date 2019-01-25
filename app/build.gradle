@@ -5,7 +5,9 @@ apply plugin: com.tb.plugin.TbPluginPackageApk
 
 android {
     compileSdkVersion _compileSdkVersion
-    flavorDimensions 'water', '360'
+    //多维度的，如果只有一个维度，则下面的productFlavors里面的不需要写dimension了
+    //两个维度，每个维度下面两个flavor，结合下面的buildType，一共会产生2*2*2=8个变体
+    flavorDimensions 'money', 'channel'
 
     signingConfigs {
         keyConfig {
@@ -26,8 +28,8 @@ android {
         resValue "string", "app_name", "tbPlugin"
     }
     productFlavors {
-        water {
-            dimension 'water'
+        vip {
+            dimension 'money'
             versionNameSuffix '.5'
             applicationIdSuffix '.water'
             // 动态添加 string.xml 字段；
@@ -38,8 +40,20 @@ android {
             // 修改 AndroidManifest.xml 里渠道变量
 //            manifestPlaceholders = [ENVIRONMENT: "water"]
         }
-        t360 {
-            dimension '360'
+        free {
+            dimension 'money'
+            versionNameSuffix '.5'
+            applicationIdSuffix '.water'
+            // 动态添加 string.xml 字段；
+            // 注意，这里是添加，在 string.xml 不能有这个字段，会重名！！！
+//            resValue "string", "app_name", "water_tbPlugin"
+            // 动态修改 常量 字段
+            buildConfigField "String", "ENVIRONMENT", '"water"'
+            // 修改 AndroidManifest.xml 里渠道变量
+//            manifestPlaceholders = [ENVIRONMENT: "water"]
+        }
+        baidu {
+            dimension 'channel'
             versionName '2.3'
             applicationId 'com.tb.t360'
 //            resValue "string", "app_name", "t360_tbPlugin"
@@ -47,7 +61,7 @@ android {
 //            manifestPlaceholders = [ENVIRONMENT: "t360"]
         }
         xiaomi {
-            dimension '360'
+            dimension 'channel'
 //            resValue "string", "app_name", "xiaomi_tbPlugin"
             buildConfigField "String", "ENVIRONMENT", '"xiaomi"'
 //            manifestPlaceholders = [ENVIRONMENT: "xiaomi"]
